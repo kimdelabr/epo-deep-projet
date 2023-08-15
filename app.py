@@ -14,7 +14,7 @@ def hello_world():
     img2 = "static/cat_or_dog_2.jpg"
     img3 = "static/cat_or_dog_3.jpg"
 
-    model_final = load_model("mobNet_model_tf.tf")
+    model_final = load_model("mobNet_model_tf.tf/saved_model.pb")
 
     img_file = img3
     #test_image = load_img(img_file, target_size = (64, 64))
