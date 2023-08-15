@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request
 import numpy as np
-import tensorflow as tf
-
 #from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
@@ -9,32 +7,27 @@ from PIL import Image
 
 app = Flask(__name__)
 
-
 @app.route("/")
+
 def hello_world():
     img1 = "static/cat_or_dog_1.jpg"
     img2 = "static/cat_or_dog_2.jpg"
     img3 = "static/cat_or_dog_3.jpg"
 
-    file = "mobNet_model_tf.tf"
-    # Load the entire model (architecture and weights)
-    loaded_model = tf.keras.models.load_model(file)
-    
+    model_final = load_model("mobNet_model_tf.tf")
 
-    img_file = img2
+    img_file = img3
+    #test_image = load_img(img_file, target_size = (64, 64))
+    test_image = Image.open(img_file).resize((224, 224))
 
-    test_image = load_img(img_file, target_size = (224, 224))
-    test_image = np.array(test_image)
+    test_image = img_to_array(test_image)
     test_image = np.expand_dims(test_image, axis = 0)
-
-    result = loaded_model.predict(test_image)
-
-    if result[0][0]  <= 0.85:
-        classif = 'chien'
+    result = model_final.predict(test_image)
+    #training_set.class_indices
+    if result[0][0] <= 0.85:
+        return 'chien'
     else:
-        classif = 'chat'
-
-    return classif
+        return 'chat'
 
 
 app.debug = True
