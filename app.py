@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request
 import numpy as np
 import tensorflow as tf
+
+#from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from PIL import Image
 
 app = Flask(__name__)
+
 
 @app.route("/")
 def hello_world():
@@ -17,7 +20,8 @@ def hello_world():
     # Load the entire model (architecture and weights)
     loaded_model = tf.keras.models.load_model(file)
     
-    img_file = img1
+
+    img_file = img2
 
     test_image = load_img(img_file, target_size = (224, 224))
     test_image = np.array(test_image)
