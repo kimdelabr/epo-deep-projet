@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import numpy as np
+import tensorflow as tf
 #from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
@@ -14,7 +15,9 @@ def hello_world():
     img2 = "static/cat_or_dog_2.jpg"
     img3 = "static/cat_or_dog_3.jpg"
 
-    model_final = load_model("mobNet_model_tf.tf/saved_model.pb")
+    #model_final = load_model("mobNet_model_tf.tf/saved_model.pb")
+    model_final = tf.saved_model.load("mobNet_model_tf.tf/saved_model.pb")
+
 
     img_file = img3
     #test_image = load_img(img_file, target_size = (64, 64))
