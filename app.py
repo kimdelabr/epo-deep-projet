@@ -36,7 +36,7 @@ def hello_world():
     else:
         classif = 'chat'
 
-    print(classif)
+    return classif
 
 
 
