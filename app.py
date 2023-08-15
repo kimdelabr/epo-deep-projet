@@ -15,7 +15,7 @@ def hello_world():
     img2 = "static/cat_or_dog_2.jpg"
     img3 = "static/cat_or_dog_3.jpg"
 
-    model_final = load_model("mobNet_model_tf.tf/saved_model.pb", custom_objects=None)
+    model_final = load_model("mobNet_model_tf.tf", custom_objects=None)
     #model_final = tf.saved_model.load("mobNet_model_tf.tf")
 
 
