@@ -4,5 +4,3 @@ pandas
 numpy
 tensorflow
 Pillow
-tensorflow_hub
-scipy
