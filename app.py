@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    img1 = "static/chat3.jpg"
+    img1 = "static/chien1.jpg"
     img2 = "static/cat_or_dog_2.jpg"
     img3 = "static/cat_or_dog_3.jpg"
 
