@@ -10,13 +10,13 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     img1 = "static/chien1.jpg"
-    img2 = "static/cat_or_dog_2.jpg"
+    img2 = "static/cat_or_dog_1.jpg"
     img3 = "static/cat_or_dog_3.jpg"
 
     file = "model_cnn.h5"
     loaded_model = load_model(file)
 
-    img_file = img1
+    img_file = img2
   
     test_image = load_img(img_file, target_size = (64, 64))
     test_image = np.array(test_image)
