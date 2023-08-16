@@ -19,6 +19,32 @@ from keras.preprocessing.image import ImageDataGenerator
 
 import tensorflow_hub as hub
 
+
+train_datagen = ImageDataGenerator(rescale = 1./255, 
+                                shear_range = 0.2, 
+                                zoom_range = 0.2, 
+                                horizontal_flip = True)
+
+
+test_datagen = ImageDataGenerator(rescale = 1./255)
+
+
+dataset_training_set = "dataset/training_set"
+
+
+training_set = train_datagen.flow_from_directory(dataset_training_set, 
+                                                target_size = (224, 224), batch_size = 32,
+                                                class_mode = 'binary')
+
+dataset_test_set = "dataset/test_set"
+
+
+test_set = test_datagen.flow_from_directory(dataset_test_set,
+                                        target_size = (224, 224),
+                                        batch_size = 32,
+                                        class_mode = 'binary')
+
+
 mobilenet ="https://tfhub.dev/google/tf2-preview/mobilenet_v2/classification/2"
 feature_extractor = hub.KerasLayer(mobilenet,input_shape=(224,224,3))
 
@@ -50,31 +76,6 @@ def hello_world():
     img3 = "static/cat_or_dog_3.jpg"
 
 
-    train_datagen = ImageDataGenerator(rescale = 1./255, 
-                                    shear_range = 0.2, 
-                                    zoom_range = 0.2, 
-                                    horizontal_flip = True)
-
-
-    test_datagen = ImageDataGenerator(rescale = 1./255)
-
-
-    dataset_training_set = "dataset/training_set"
-
-
-    training_set = train_datagen.flow_from_directory(dataset_training_set, 
-                                                    target_size = (224, 224), batch_size = 32,
-                                                    class_mode = 'binary')
-
-    dataset_test_set = "dataset/test_set"
-
-
-    test_set = test_datagen.flow_from_directory(dataset_test_set,
-                                            target_size = (224, 224),
-                                            batch_size = 32,
-                                            class_mode = 'binary')
-
-    
 
     img_file = img3
   
