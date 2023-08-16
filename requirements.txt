@@ -5,4 +5,4 @@ numpy
 tensorflow
 Pillow
 tensorflow_hub
-spicy
+scipy
