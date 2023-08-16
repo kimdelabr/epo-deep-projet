@@ -24,7 +24,7 @@ def hello_world():
     
     result = loaded_model.predict(test_image)
     #training_set.class_indices
-    if result[0][0] == 1:
+    if result[0][0] <= 0.9:
         return 'chien'
     else:
         return 'chat'
