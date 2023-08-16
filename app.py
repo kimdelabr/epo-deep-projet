@@ -13,12 +13,12 @@ def hello_world():
     img2 = "static/cat_or_dog_2.jpg"
     img3 = "static/cat_or_dog_3.jpg"
 
-    file = "model_cnn.h5"
+    file = "mobNet_model_tf.tf"
     loaded_model = load_model(file)
 
     img_file = img3
   
-    test_image = load_img(img_file, target_size = (64, 64))
+    test_image = load_img(img_file, target_size = (224, 224))
     test_image = np.array(test_image)
     test_image = np.expand_dims(test_image, axis = 0)
     
