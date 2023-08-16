@@ -19,6 +19,26 @@ from keras.preprocessing.image import ImageDataGenerator
 
 import tensorflow_hub as hub
 
+mobilenet ="https://tfhub.dev/google/tf2-preview/mobilenet_v2/classification/2"
+feature_extractor = hub.KerasLayer(mobilenet,input_shape=(224,224,3))
+
+
+# Freeze the variables in the feature extractor layer, so that the training only modifies the final classifier layer.
+feature_extractor.trainable = False
+
+model = tf.keras.Sequential()
+
+model.add(feature_extractor),
+model.add(Dense(1, activation='sigmoid'))
+
+# Model Compile
+model.compile(loss='binary_crossentropy',
+optimizer="adam",
+metrics=['accuracy'])
+
+# Train
+model.fit(training_set, epochs=20, verbose=1, validation_data=test_set)
+
 
 
 app = Flask(__name__)
@@ -54,25 +74,7 @@ def hello_world():
                                             batch_size = 32,
                                             class_mode = 'binary')
 
-    mobilenet ="https://tfhub.dev/google/tf2-preview/mobilenet_v2/classification/2"
-    feature_extractor = hub.KerasLayer(mobilenet,input_shape=(224,224,3))
-
-    # Freeze the variables in the feature extractor layer, so that the training only modifies the final classifier layer.
-    feature_extractor.trainable = False
-
-    model = tf.keras.Sequential()
-
-    model.add(feature_extractor),
-    model.add(Dense(1, activation='sigmoid'))
-
-    # Model Compile
-    model.compile(loss='binary_crossentropy',
-    optimizer="adam",
-    metrics=['accuracy'])
-
-    # Train
-    model.fit(training_set, epochs=20, verbose=1, validation_data=test_set)
-
+    
 
     img_file = img3
   
