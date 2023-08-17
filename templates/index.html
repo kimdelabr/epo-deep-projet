@@ -1,0 +1,60 @@
+<html>
+<head>
+    <title>Classification d'Image</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+
+<header>
+    <div>
+        <img src="../static/epo.jpg">
+    </div>
+</header>
+
+<nav><h1>Projet Chat ou Chien Classification </h1></nav>
+
+<div class="container">
+<div class="row">
+    <h2>Sélectionner un fichier à télécharger</h2>
+    <p>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </p>
+   
+    {% if filename %}
+    <div>
+        <img src="{{ url_for('display_image', filename=filename) }}">
+    </div>
+    {% endif %}
+
+    <form method="post" action="/" enctype="multipart/form-data">
+        <dl>
+            <p>
+                <input type="file" name="file" class="form-control" autocomplete="off" required>
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="Soumettre" class="btn btn-info">
+        </p>
+    </form>
+
+    <h2>Resultat de la classification</h2>
+
+    <br>
+    {% if prediction %}
+        <h4> L'image est un {{prediction}}</h4>
+    {% endif %}
+</div>
+</div>
+</body>
+</html>
