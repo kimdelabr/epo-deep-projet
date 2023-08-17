@@ -32,7 +32,7 @@ def home():
 @app.route('/', methods=['POST'])
 def upload_image():
     file = request.files['file']
-    model_file = "mobNet_model_tf.tf"
+    model_file = "model_cnn.h5"
     loaded_model = tf.keras.models.load_model(model_file)
 
     if 'file' not in request.files:
@@ -52,7 +52,7 @@ def upload_image():
 
         img_file = image_path
 
-        test_image = load_img(img_file, target_size = (224, 224))
+        test_image = load_img(img_file, target_size = (64, 64))
         test_image = np.array(test_image)
         test_image = np.expand_dims(test_image, axis = 0)
 
