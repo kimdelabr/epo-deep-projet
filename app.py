@@ -36,16 +36,16 @@ def upload_image():
     loaded_model = tf.keras.models.load_model(model_file)
 
     if 'file' not in request.files:
-        flash('No file part')
+        flash('Pas de fichier')
         return redirect(request.url)
     if file.filename == '':
-        flash('No image selected for uploading')
+        flash('Aucune image sélectionnée pour le téléchargement')
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        print('upload_image filename: ' + filename)
-        flash('Image successfully uploaded and displayed below')
+        print("nom de fichier de l'image téléchargée : " + filename)
+        flash("L'image a été téléchargée avec succès et s'affiche ci-dessous")
 
         image_path = "./static/uploads/" + filename
         #imagefile.save(image_path)
@@ -64,13 +64,13 @@ def upload_image():
 
         return render_template('index.html', filename=filename, prediction=classif)
     else:
-        flash('Allowed image types are - png, jpg, jpeg, gif')
+        flash("Les types d'images autorisés sont : png, jpg, jpeg, gif.")
         return redirect(request.url)
 
 
 @app.route('/display/<filename>')
 def display_image(filename):
-    print('display_image filename: ' + filename)
+    print("nom du fichier de l'image affichée : " + filename)
     return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
