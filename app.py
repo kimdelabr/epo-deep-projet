@@ -32,7 +32,7 @@ def home():
 @app.route('/', methods=['POST'])
 def upload_image():
     file = request.files['file']
-    model_file = "mobNet_model_tf.tf"
+    model_file = "mobNet_model_tf.tf/saved_model.pb"
     loaded_model = tf.keras.models.load_model(model_file)
 
     if 'file' not in request.files:
@@ -57,7 +57,7 @@ def upload_image():
         test_image = np.expand_dims(test_image, axis = 0)
 
         result = loaded_model.predict(test_image)
-        if result[0][0]  == 1:
+        if result[0][0]  <= 0.85:
             classif = 'chien'
         else:
             classif = 'chat'
